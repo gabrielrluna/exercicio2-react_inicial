@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import serverApi from "./api/servidor-api";
+import estilos from "./App.css";
 
 function App() {
   const [produtos, setProdutos] = useState([]);
@@ -19,15 +19,19 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {produtos.map(
-        ({ id, title, price, image }) => (
-          (id = { id }),
-          (image = { image }),
-          (title = { title }),
-          (price = { price })
-        )
-      )}
+    <div className="listaProdutos">
+      {produtos.map(({ id, title, price, image }) => (
+        <div className="caixa" key={id}>
+          <img className="foto" src={image} />
+          <h1>{title}</h1>
+          <p>
+            {price.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
